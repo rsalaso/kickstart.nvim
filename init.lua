@@ -352,18 +352,26 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
-        -- pickers = {}
+        defaults = {
+          -- mappings = {
+          -- i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+          -- },
+          path_display = { truncate = 5 },
+        },
+        pickers = {
+          find_files = {
+            hidden = true,
+            file_ignore_patterns = { '.git/', '.supermaven/', '.cache/' },
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
         },
       }
+
+      -- require('telescope.builtin').find_files { path_display = { 'truncate' } }
 
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
@@ -585,7 +593,29 @@ require('lazy').setup({
           },
         },
         -- gopls = {},
-        basedpyright = {},
+        -- pyright = {},
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              analysis = {
+                -- extraPaths = {
+                --   '/opt/ros/humble/lib/python3.10/site-packages',
+                --   '/opt/ros/humble/local/lib/python3.10/dist-packages',
+                --   '/home/wig/ks_ws/install/opaque_functions/lib/python3.10/site-packages',
+                --   '/home/wig/build/opaque_functions',
+                -- },
+                -- include = {
+                --   '/opt/ros/humble/lib/python3.10/site-packages',
+                --   '/opt/ros/humble/local/lib/python3.10/dist-packages',
+                --   '/home/wig/ks_ws/install/opaque_functions/lib/python3.10/site-packages',
+                --   '/home/wig/build/opaque_functions',
+                -- },
+                typeCheckingMode = 'standard',
+                -- reportMissingTypeStubs = false,
+              },
+            },
+          },
+        },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -808,7 +838,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'catppuccin-mocha'
+      vim.cmd.colorscheme 'catppuccin'
 
       -- You can configure highlights by doing something like:
       -- vim.cmd.hi 'Comment gui=none'
